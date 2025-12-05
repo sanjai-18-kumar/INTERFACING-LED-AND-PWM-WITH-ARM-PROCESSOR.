@@ -54,15 +54,51 @@ Header:
 
 # PIN DIAGRAM :
 
+<img width="922" height="543" alt="image" src="https://github.com/user-attachments/assets/d826b7d5-a24f-4f5f-b656-ea76fb50b855" />
+
 
 # CIRCUIT DIAGRAM:
- 
+
+ <img width="768" height="385" alt="image" src="https://github.com/user-attachments/assets/84e2dfa4-e3cd-4603-8352-1d3467a5de18" />
+
  
 # PROGRAM:
-
-
- 
+```
+#include <lpc17xx.h>
+#include "pwm.h"
+#include "delay.h"
+#define CYCLE_TIME 100
+/* start the main program */
+int main()
+{
+int dutyCycle;
+SystemInit(); /* Clock and PLL configuration */
+PWM_Init(CYCLE_TIME); /* Initialize the PWM module and the Cycle time(Ton+Toff) is
+set to 255(similar to arduino)*/
+PWM_Start(PWM_3); /* Enable PWM output on PWM_1-PWM_4 (P2_0 - P2_3) */
+while(1)
+{
+for(dutyCycle=0;dutyCycle<CYCLE_TIME;dutyCycle++) /* Increase the Brightness of the
+Leds */
+{
+PWM_SetDutyCycle(PWM_3,dutyCycle); //P2_2
+DELAY_ms(10);
+}
+17
+for(dutyCycle=CYCLE_TIME;dutyCycle>0;dutyCycle--) /* Decrease the Brightness of the
+Leds */
+{
+PWM_SetDutyCycle(PWM_3,dutyCycle); //P2_2
+DELAY_ms(10);
+}
+}
+}
+```
 # Output:
+![WhatsApp Image 2025-11-11 at 13 10 39_72d78ece](https://github.com/user-attachments/assets/dbbd1b7d-f9ec-4ddb-982b-c46fd791a929)
+
+# Result : 
+Thus,an embedded C program is written in order to interface PWM with LPC1768.
 
 
 
